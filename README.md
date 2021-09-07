@@ -1,7 +1,10 @@
-# Vis2Mesh: Efficient Mesh Reconstruction from Unstructured Point Clouds of Large Scenes with Learned Virtual View Visibility, ICCV2021
+# Vis2Mesh
+
+This is the offical repository of the paper:
+
+**Vis2Mesh: Efficient Mesh Reconstruction from Unstructured Point Clouds of Large Scenes with Learned Virtual View Visibility**
 
 [https://arxiv.org/abs/2108.08378](https://arxiv.org/abs/2108.08378)
-
 
 ```
 @misc{song2021vis2mesh,
@@ -20,11 +23,10 @@
 
 ##### TODO
 
-- Dockerfile
 - Ground truth generation and network training.
 - Evaluation scripts
 
-#### Installation
+#### Build With Docker (Recommended)
 
 ##### Install nvidia-docker2
 
@@ -38,10 +40,62 @@ sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
 sudo systemctl restart docker
 ```
 
-<!-- # Usage -->
+##### Build docker image
 
+`docker build . -t vis2mesh`
 
+#### Build on Ubuntu
 
+Please create a conda environment with pytorch and check out our setup script:
+
+`./setup_tools.sh`
+#### Usage
+##### Get pretrained weights and examples
+
+``` shell
+pip install gdown
+./checkpoints/get_pretrained.sh
+./example/get_example.sh
+```
+##### Run example
+
+The main command for surface reconstruction, the result will be copied as `$(CLOUDFILE)_vis2mesh.ply`.
+
+`inference.py example/example1.ply --cam cam0`
+
+We suggested to use docker, either in interactive mode or single shot mode.
+
+```bash
+xhost +
+name=vis2mesh
+# Run in interactive mode
+docker run -it \
+--mount type=bind,source="$PWD/checkpoints",target=/workspace/checkpoints \
+--mount type=bind,source="$PWD/example",target=/workspace/example \
+--privileged \
+-e NVIDIA_DRIVER_CAPABILITIES=all \
+-e DISPLAY=unix$DISPLAY \
+-v $XAUTH:/root/.Xauthority \
+-v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+--device=/dev/dri \
+--gpus all $name
+
+cd /workspace
+inference.py example/example1.ply --cam cam0
+
+# Run with single shot call
+docker run \
+--mount type=bind,source="$PWD/checkpoints",target=/workspace/checkpoints \
+--mount type=bind,source="$PWD/example",target=/workspace/example \
+--privileged \
+-e NVIDIA_DRIVER_CAPABILITIES=all \
+-e DISPLAY=unix$DISPLAY \
+-v $XAUTH:/root/.Xauthority \
+-v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+--device=/dev/dri \
+--gpus all $name \
+/workspace/inference.py example/example1.ply --cam cam0
+```
 
 
 <!-- # Training

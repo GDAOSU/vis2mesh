@@ -12,6 +12,6 @@ install(TARGETS OBJFile
         PUBLIC_HEADER DESTINATION include/OBJFile)
 
 # test
-add_executable(test_OBJFile test/test_OBJFile.cpp)
-target_link_libraries(test_OBJFile OBJFile doctest::doctest)
-add_test(test_OBJFile test_OBJFile)
+# add_executable(test_OBJFile test/test_OBJFile.cpp)
+# target_link_libraries(test_OBJFile OBJFile doctest::doctest)
+# add_test(test_OBJFile test_OBJFile)

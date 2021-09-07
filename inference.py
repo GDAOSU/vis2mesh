@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 import sys
 import glob
@@ -24,7 +25,7 @@ def next_camname_in_folder(folder):
             maxid=max(maxid,int(res.group(1)))
     return join(folder,f'cam{maxid+1}.json')
 
-def findToolset(dep_tools = ['vvtool','simplecamcreator','ReconstructMesh']):
+def findToolset(dep_tools = ['vvtool','o3d_vvcreator.py','ReconstructMesh']):
     Toolset=dict()
     print('#Available Toolset#')
     for t in dep_tools:
@@ -138,8 +139,8 @@ def Setup(args):
             'imagewidth':args.imagewidth,
             'imageheight':args.imageheight,
             'imagefocal':args.imagefocal,
-            'camgenheight':args.camgenheight,
-            'camgenoverlap':args.camgenoverlap,
+            # 'camgenheight':args.camgenheight,
+            # 'camgenoverlap':args.camgenoverlap,
             'render_shader':args.shader,
             'render_radius_k':args.radius_k,
             'vis':args.vis,
@@ -154,10 +155,10 @@ def CreateCam(config):
     ImageHeight = config['imageheight']
     ImageWidth = config['imagewidth']
     ImageFocal = config['imagefocal']
-    CamGenHeight= config['camgenheight']
-    CamGenOverlap= config['camgenoverlap']
+    # CamGenHeight= config['camgenheight']
+    # CamGenOverlap= config['camgenoverlap']
 
-    camcommand = [config['Toolset']['simplecamcreator'],f'--ip={config["INPUT_CLOUD"]}',f'--ol={config["INPUT_CAM"]}',f'--width={ImageWidth}',f'--height={ImageHeight}',f'--focal={ImageFocal}',f'--camgenheight={CamGenHeight}',f'--camgenoverlap={CamGenOverlap}']
+    camcommand = [config['Toolset']['o3d_vvcreator.py'],f'--output_list={config["INPUT_CAM"]}',f'--width={ImageWidth}',f'--height={ImageHeight}',config["INPUT_CLOUD"]]
     if config['BASE_CAM'] != '':
         camcommand.append(f'--il={config["BASE_CAM"]}')
     if not exists(config['INPUT_CAM']):
@@ -324,6 +325,12 @@ def RunProcess(config):
         print("*** Success *** ")
         print(result_file)
         os.chmod(result_file, stat.S_IROTH|stat.S_IWOTH|stat.S_IXOTH)
+        result_copy_file = config['INPUT_CLOUD'][:-4]+"_vis2mesh.ply"
+        cnt=1
+        while exists(result_copy_file):
+            result_copy_file = config['INPUT_CLOUD'][:-4]+f"_vis2mesh{cnt}.ply"
+            cnt += 1
+        shutil.copy(result_file, result_copy_file)
     else:
         print("*** Generation Failed *** ")
     return config
@@ -344,8 +351,8 @@ def parseArgs():
     camgroup.add_argument('--imagewidth',default=512,type=int)
     camgroup.add_argument('--imageheight',default=512,type=int)
     camgroup.add_argument('--imagefocal',default=300,type=float)
-    camgroup.add_argument('--camgenheight',default=10,type=float)
-    camgroup.add_argument('--camgenoverlap',default=0.5,type=float)
+    # camgroup.add_argument('--camgenheight',default=10,type=float)
+    # camgroup.add_argument('--camgenoverlap',default=0.5,type=float)
 
     rendgroup = parser.add_argument_group("GLRender")
     rendgroup.add_argument('--shader',default='POINT',type=str,help='shader {POINT|RECTANGLE|DOT|DIAMOND}')

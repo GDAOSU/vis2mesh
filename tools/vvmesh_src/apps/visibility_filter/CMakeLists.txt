@@ -18,7 +18,7 @@ target_include_directories(FILTER_plugins INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(FILTER_plugins
         PUBLIC FBORender PluginInterface
         PRIVATE qhullcpp::qhullcpp CGAL::CGAL
-        opencv::core opencv::highgui opencv::imgcodecs pcl_io)
+        ${OpenCV_LIBS} pcl_io)
 set_target_properties(FILTER_plugins PROPERTIES
         PUBLIC_HEADER "${HEADERS}")
 

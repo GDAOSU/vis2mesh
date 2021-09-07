@@ -1,0 +1,6 @@
+example/
+checkpoints/
+imgs/
+dataset/
+ignore/
+*.md

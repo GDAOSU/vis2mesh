@@ -12,7 +12,7 @@ target_include_directories(CLOUD_BUNDLE_plugin PRIVATE ${tinyply_INCLUDE_DIRS})
 target_link_libraries(CLOUD_BUNDLE_plugin
         PUBLIC PluginInterface
         PRIVATE MVArchive tinyply::tinyply
-        opencv::core opencv::highgui opencv::imgproc pcl_io)
+        ${OpenCV_LIBS} pcl_io)
 
 install(TARGETS CLOUD_BUNDLE_plugin
         RUNTIME DESTINATION bin

@@ -1,13 +1,16 @@
-vvmesh/build
 tools/bin
 tools/include
 tools/lib
 tools/openMVS_build
 tools/vvmesh_build
 tools/vcglib
-
+evaluation/*
+trainer/*
+example/*.ply*
 ###### VVMESH ###
 /cmake-build-*/**
+*.pyc
+**/__pycache__/**
 *.obj
 *.mva
 .idea
@@ -31,3 +34,4 @@ cache.pk
 CMakeSettings.json
 /external/
 /hunter_deps/
+**.ply_WORK/**

@@ -1,7 +1,7 @@
 import numpy as np
 import json
 import imageio
-import open3d as o3d
+# import open3d as o3d
 import torch
 
 def readFlt(path):
@@ -162,25 +162,25 @@ def bgmask_2(pointdep, meshdep, meshculldep, threshold_depth_diff=1):
     return ((255 - fgmask) * (pointdep > -1)).astype(np.uint8)
 
 
-def localFeatStructuredPoints(pointdep, cam, K=6):
-    pointXYZ = unprojImage(pointdep, cam)
-    vecXYZ = pointXYZ.reshape(3, -1)
+# def localFeatStructuredPoints(pointdep, cam, K=6):
+#     pointXYZ = unprojImage(pointdep, cam)
+#     vecXYZ = pointXYZ.reshape(3, -1)
 
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(vecXYZ.T)
+#     pcd = o3d.geometry.PointCloud()
+#     pcd.points = o3d.utility.Vector3dVector(vecXYZ.T)
 
-    feat = np.zeros((4, vecXYZ.shape[1]), dtype=np.float)
-    kdtree = o3d.geometry.KDTreeFlann(pcd)
-    for i in range(vecXYZ.shape[1]):
-        p = vecXYZ[:, i]
-        k, idx, radius = kdtree.search_knn_vector_3d(p, K + 1)
-        ck = np.mean(vecXYZ[:, idx], axis=1)
-        r = np.mean(radius[1:])
-        v = ck - p
-        feat[0, i] = r
-        feat[1:4, i] = v
-    feat = feat.reshape((4, *pointdep.shape))
-    return feat
+#     feat = np.zeros((4, vecXYZ.shape[1]), dtype=np.float)
+#     kdtree = o3d.geometry.KDTreeFlann(pcd)
+#     for i in range(vecXYZ.shape[1]):
+#         p = vecXYZ[:, i]
+#         k, idx, radius = kdtree.search_knn_vector_3d(p, K + 1)
+#         ck = np.mean(vecXYZ[:, idx], axis=1)
+#         r = np.mean(radius[1:])
+#         v = ck - p
+#         feat[0, i] = r
+#         feat[1:4, i] = v
+#     feat = feat.reshape((4, *pointdep.shape))
+#     return feat
 
 def unprojTensorImage(input, camK):
     B, C, H, W = input.shape

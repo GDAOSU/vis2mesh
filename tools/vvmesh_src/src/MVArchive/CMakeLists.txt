@@ -5,7 +5,7 @@ set(HEADERS dllmacro.h
         ARInterface_impl.hpp)
 
 add_library(MVArchive STATIC ${SRCS})
-target_link_libraries(MVArchive PRIVATE ${ZLIB_LIBRARIES} ${zstd_LIBRARIES} CONAN_LIB::opencv_opencv_core OpenMP::OpenMP_CXX)
+target_link_libraries(MVArchive PRIVATE ${ZLIB_LIBRARIES} ${zstd_LIBRARIES} ${OpenCV_LIBS} OpenMP::OpenMP_CXX)
 set_target_properties(MVArchive PROPERTIES
         PUBLIC_HEADER "${HEADERS}")
 target_compile_definitions(MVArchive PRIVATE ARCHIVE_DLL_EXPORTS)
