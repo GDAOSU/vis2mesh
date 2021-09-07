@@ -1,0 +1,7 @@
+
+add_subdirectory(simplecamcreator)
+add_subdirectory(glrender)
+add_subdirectory(visibility_filter)
+add_subdirectory(bundle_packing)
+add_subdirectory(visibility_network)
+add_subdirectory(vvtool)

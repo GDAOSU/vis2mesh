@@ -1,0 +1,13 @@
+newmtl Tile_+000_+007_L17_0
+Ka 1 1 1
+Kd 1 1 1
+d 1
+Ns 0
+illum 1
+map_Kd Tile_+000_+007_L17_0.jpg
+newmtl Tile_+000_+007_L17_untextured
+Ka 0.501961 0.501961 0.501961
+Kd 0.501961 0.501961 0.501961
+d 1
+Ns 0
+illum 1
