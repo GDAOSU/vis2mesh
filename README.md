@@ -61,7 +61,7 @@ pip install gdown
 
 The main command for surface reconstruction, the result will be copied as `$(CLOUDFILE)_vis2mesh.ply`.
 
-`inference.py example/example1.ply --cam cam0`
+`python inference.py example/example1.ply --cam cam0`
 
 We suggested to use docker, either in interactive mode or single shot mode.
 
@@ -81,7 +81,7 @@ docker run -it \
 --gpus all $name
 
 cd /workspace
-inference.py example/example1.ply --cam cam0
+python inference.py example/example1.ply --cam cam0
 
 # Run with single shot call
 docker run \
@@ -96,6 +96,17 @@ docker run \
 --gpus all $name \
 /workspace/inference.py example/example1.ply --cam cam0
 ```
+
+##### Run with Customize Views
+
+`python inference.py example/example1.ply`
+Run the command without `--cam` flag, you can add virtual views interactively with the following GUI. Your views will be recorded in `example/example1.ply_WORK/cam*.json`.
+
+![Main View](imgs/simplecamcreator.png)
+
+Navigate in 3D viewer and click key `[Space]` to record current view. Click key `[Q]` to close the window and continue meshing process.
+
+![Record Virtual Views](imgs/simplecam_recordview.png)
 
 
 <!-- # Training

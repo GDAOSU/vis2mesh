@@ -41,6 +41,10 @@ if __name__ == '__main__':
     args = parseArgs()
     print(args)
 
+    print("Instruction")
+    print("-----------")
+    print(" [SPC] Record Current View")
+
     WHRatio = args.width / args.height
     prin_x = args.width / 2.0
     prin_y = args.height / 2.0
