@@ -73,6 +73,7 @@ docker run -it \
 --mount type=bind,source="$PWD/checkpoints",target=/workspace/checkpoints \
 --mount type=bind,source="$PWD/example",target=/workspace/example \
 --privileged \
+--net=host \
 -e NVIDIA_DRIVER_CAPABILITIES=all \
 -e DISPLAY=unix$DISPLAY \
 -v $XAUTH:/root/.Xauthority \
@@ -88,6 +89,7 @@ docker run \
 --mount type=bind,source="$PWD/checkpoints",target=/workspace/checkpoints \
 --mount type=bind,source="$PWD/example",target=/workspace/example \
 --privileged \
+--net=host \
 -e NVIDIA_DRIVER_CAPABILITIES=all \
 -e DISPLAY=unix$DISPLAY \
 -v $XAUTH:/root/.Xauthority \
