@@ -4,7 +4,7 @@ This is the offical repository of the paper:
 
 **Vis2Mesh: Efficient Mesh Reconstruction from Unstructured Point Clouds of Large Scenes with Learned Virtual View Visibility**
 
-[ICCV](https://openaccess.thecvf.com/content/ICCV2021/html/Song_Vis2Mesh_Efficient_Mesh_Reconstruction_From_Unstructured_Point_Clouds_of_Large_ICCV_2021_paper.html) | [Arxiv](https://arxiv.org/abs/2108.08378)
+[ICCV](https://openaccess.thecvf.com/content/ICCV2021/html/Song_Vis2Mesh_Efficient_Mesh_Reconstruction_From_Unstructured_Point_Clouds_of_Large_ICCV_2021_paper.html) | [Arxiv](https://arxiv.org/abs/2108.08378) | [Presentation](https://youtu.be/KN55e_q6llE?feature=shared)
 
 ```
 @InProceedings{Song_2021_ICCV,
