@@ -1,7 +1,7 @@
 set(SRCS obj.cpp)
 set(HEADERS obj.h)
 add_library(OBJFile STATIC ${SRCS})
-target_link_libraries(OBJFile PRIVATE ${opencv_LIBRARIES})
+target_link_libraries(OBJFile PRIVATE ${opencv_LIBRARIES} ${OpenCV_LIBS})
 set_target_properties(OBJFile PROPERTIES
         PUBLIC_HEADER "${HEADERS}")
 

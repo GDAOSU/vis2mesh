@@ -18,7 +18,7 @@ apt-get install -yqq --no-install-recommends \
     libopencv-dev libcgal-dev libeigen3-dev libpcl-dev
 
 conda install -yq cmake
-pip install -qq conan open3d imageio gdown
+pip install -qq "conan<2" open3d imageio gdown
 
 # Clean Cache
 rm -rf ./tools/vvmesh_build ./tools/openMVS_build ./tools/bin ./tools/lib ./tools/include ./tools/vcglib

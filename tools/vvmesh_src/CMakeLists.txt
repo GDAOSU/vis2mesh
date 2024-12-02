@@ -105,7 +105,7 @@ endif()
 
 if (OpenCV_FOUND)
     message("++ Enable OpenCV support")
-    include_directories(${opencv_INCLUDE_DIRS})
+    include_directories(${opencv_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
     add_definitions(-D_USE_OPENCV)
 endif ()
 
